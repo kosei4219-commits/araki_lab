@@ -1,25 +1,31 @@
-import { Button } from "@/components/ui/button";
-import { Loader2 } from "lucide-react";
-import { Streamdown } from 'streamdown';
-
 /**
- * All content in this page are only for example, replace with your own feature implementation
- * When building pages, remember your instructions in Frontend Best Practices, Design Guide and Common Pitfalls
+ * Home Page
+ * Design: Scientific Precision - Swiss International Style
+ * 荒木研究室 Webサイト メインページ
  */
-export default function Home() {
-  // If theme is switchable in App.tsx, we can implement theme toggling like this:
-  // const { theme, toggleTheme } = useTheme();
 
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import HeroSection from "@/components/sections/HeroSection";
+import AboutSection from "@/components/sections/AboutSection";
+import ResearchSection from "@/components/sections/ResearchSection";
+import EducationSection from "@/components/sections/EducationSection";
+import CareerSection from "@/components/sections/CareerSection";
+import NewsSection from "@/components/sections/NewsSection";
+
+export default function Home() {
   return (
     <div className="min-h-screen flex flex-col">
-      <main>
-        {/* Example: lucide-react for icons */}
-        <Loader2 className="animate-spin" />
-        Example Page
-        {/* Example: Streamdown for markdown rendering */}
-        <Streamdown>Any **markdown** content</Streamdown>
-        <Button variant="default">Example Button</Button>
+      <Header />
+      <main className="flex-1">
+        <HeroSection />
+        <AboutSection />
+        <ResearchSection />
+        <EducationSection />
+        <CareerSection />
+        <NewsSection />
       </main>
+      <Footer />
     </div>
   );
 }
