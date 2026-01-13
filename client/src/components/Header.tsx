@@ -5,7 +5,8 @@
  */
 
 import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetTrigger, SheetTitle, SheetDescription } from "@/components/ui/sheet";
+import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import { Menu, Globe } from "lucide-react";
 import { useState, useEffect } from "react";
 
@@ -112,6 +113,10 @@ export default function Header() {
                 </Button>
               </SheetTrigger>
               <SheetContent side="right" className="w-[280px]">
+                <VisuallyHidden>
+                  <SheetTitle>ナビゲーションメニュー</SheetTitle>
+                  <SheetDescription>サイト内のセクションへ移動できます</SheetDescription>
+                </VisuallyHidden>
                 <div className="flex flex-col gap-6 mt-8">
                   <div className="flex flex-col">
                     <span className="text-xl font-bold">荒木研究室</span>
