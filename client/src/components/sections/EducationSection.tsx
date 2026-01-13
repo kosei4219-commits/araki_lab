@@ -21,7 +21,7 @@ interface ScheduleItem {
 }
 
 const annualSchedule: ScheduleItem[] = [
-  { month: "4月", events: ["新年度スタート", "研究テーマ決定"] },
+  { month: "4月", events: ["新年度スタート"] },
   { month: "5月", events: ["中間発表準備"] },
   { month: "6月", events: ["日本金属学会（春期）"] },
   { month: "7月", events: ["前期中間発表"] },
