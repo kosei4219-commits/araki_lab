@@ -14,6 +14,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { Link } from "wouter";
+import seminarDiscussionImage from "@/assets/images/seminar-discussion.png";
 
 const educationHighlights = [
   {
@@ -115,7 +116,7 @@ export default function EducationSection() {
             <div className="mt-8 relative">
               <div className="absolute -inset-4 bg-gradient-to-br from-[var(--electric-blue)]/5 to-transparent rounded-2xl" />
               <img
-                src="/images/seminar-discussion.png"
+                src={seminarDiscussionImage}
                 alt="研究室でのディスカッション風景"
                 className="relative w-full rounded-xl shadow-lg"
               />
