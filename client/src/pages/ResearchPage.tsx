@@ -168,8 +168,8 @@ export default function ResearchPage() {
                                 <div
                                     key={theme.id}
                                     className={`transition-all duration-700 ${isVisible
-                                            ? "opacity-100 translate-y-0"
-                                            : "opacity-0 translate-y-8"
+                                        ? "opacity-100 translate-y-0"
+                                        : "opacity-0 translate-y-8"
                                         }`}
                                     style={{ transitionDelay: `${themeIndex * 200}ms` }}
                                 >
@@ -245,7 +245,7 @@ export default function ResearchPage() {
                                             <div className="relative mb-6">
                                                 <div className="absolute -inset-4 bg-gradient-to-br from-[var(--electric-blue)]/5 to-transparent rounded-2xl" />
                                                 <img
-                                                    src={theme.image}
+                                                    src={`${import.meta.env.BASE_URL}${theme.image.replace(/^\//, "")}`}
                                                     alt={theme.title}
                                                     className="relative w-full rounded-xl shadow-lg"
                                                 />
