@@ -1,7 +1,7 @@
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
-import { Route, Switch } from "wouter";
+import { Route, Switch, Router } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
@@ -11,7 +11,7 @@ import EducationPage from "./pages/EducationPage";
 import CareerPage from "./pages/CareerPage";
 import NewsPage from "./pages/NewsPage";
 
-function Router() {
+function AppRoutes() {
   return (
     <Switch>
       <Route path="/" component={Home} />
@@ -27,12 +27,17 @@ function Router() {
 }
 
 function App() {
+  // GitHub Pages用にベースパスを設定（末尾のスラッシュを削除）
+  const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+
   return (
     <ErrorBoundary>
       <ThemeProvider defaultTheme="light">
         <TooltipProvider>
           <Toaster />
-          <Router />
+          <Router base={base}>
+            <AppRoutes />
+          </Router>
         </TooltipProvider>
       </ThemeProvider>
     </ErrorBoundary>
