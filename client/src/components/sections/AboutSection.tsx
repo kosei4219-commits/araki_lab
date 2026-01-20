@@ -8,6 +8,7 @@ import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { Link } from "wouter";
+import positronImage from "@/assets/images/positron-annihilation.png";
 
 export default function AboutSection() {
   const [isVisible, setIsVisible] = useState(false);
@@ -122,7 +123,7 @@ export default function AboutSection() {
             <div className="relative">
               <div className="absolute -inset-4 bg-gradient-to-br from-[var(--electric-blue)]/10 to-transparent rounded-2xl" />
               <img
-                src="/images/positron-annihilation.png"
+                src={positronImage}
                 alt="陽電子消滅プロセスの図解"
                 className="relative w-full rounded-xl shadow-2xl"
               />
@@ -160,6 +161,6 @@ export default function AboutSection() {
           ))}
         </div>
       </div>
-    </section>
+    </section >
   );
 }
