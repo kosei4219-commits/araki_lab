@@ -7,6 +7,7 @@
 import { Button } from "@/components/ui/button";
 import { ArrowDown, ChevronRight } from "lucide-react";
 import { useEffect, useState } from "react";
+import heroCrystalImage from "@/assets/images/hero-crystal.png";
 
 export default function HeroSection() {
   const [isVisible, setIsVisible] = useState(false);
@@ -30,7 +31,7 @@ export default function HeroSection() {
       {/* Background Image */}
       <div className="absolute inset-0">
         <img
-          src={`${import.meta.env.BASE_URL}images/hero-crystal.png`}
+          src={heroCrystalImage}
           alt="Crystal Structure"
           className="w-full h-full object-cover"
         />
@@ -55,8 +56,8 @@ export default function HeroSection() {
           {/* Lab Name */}
           <div
             className={`transition-all duration-700 ${isVisible
-                ? "opacity-100 translate-y-0"
-                : "opacity-0 translate-y-8"
+              ? "opacity-100 translate-y-0"
+              : "opacity-0 translate-y-8"
               }`}
           >
             <p className="text-sm md:text-base font-mono text-[var(--electric-blue)] tracking-widest mb-4">
@@ -70,8 +71,8 @@ export default function HeroSection() {
           {/* Main Catchphrase */}
           <div
             className={`transition-all duration-700 delay-200 ${isVisible
-                ? "opacity-100 translate-y-0"
-                : "opacity-0 translate-y-8"
+              ? "opacity-100 translate-y-0"
+              : "opacity-0 translate-y-8"
               }`}
           >
             <h2 className="text-xl md:text-2xl lg:text-3xl text-white/90 font-light leading-relaxed mb-4">
@@ -88,8 +89,8 @@ export default function HeroSection() {
           {/* Sub Catchphrase */}
           <div
             className={`transition-all duration-700 delay-300 ${isVisible
-                ? "opacity-100 translate-y-0"
-                : "opacity-0 translate-y-8"
+              ? "opacity-100 translate-y-0"
+              : "opacity-0 translate-y-8"
               }`}
           >
             <p className="text-base md:text-lg text-white/60 leading-relaxed mb-10 max-w-2xl">
@@ -102,8 +103,8 @@ export default function HeroSection() {
           {/* CTA Buttons */}
           <div
             className={`flex flex-col sm:flex-row gap-4 transition-all duration-700 delay-500 ${isVisible
-                ? "opacity-100 translate-y-0"
-                : "opacity-0 translate-y-8"
+              ? "opacity-100 translate-y-0"
+              : "opacity-0 translate-y-8"
               }`}
           >
             <Button

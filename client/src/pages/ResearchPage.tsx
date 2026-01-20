@@ -12,6 +12,9 @@ import { Card, CardContent } from "@/components/ui/card";
 import { useEffect, useRef, useState } from "react";
 import { ArrowLeft, Car, Atom, Calculator } from "lucide-react";
 import { Link } from "wouter";
+import materialsResearchImage from "@/assets/images/materials-research.png";
+import researchLabImage from "@/assets/images/research-lab.png";
+import seminarDiscussionImage from "@/assets/images/seminar-discussion.png";
 
 interface ResearchTheme {
     id: string;
@@ -41,7 +44,7 @@ const researchThemes: ResearchTheme[] = [
             "軽金属材料の加工熱処理プロセス最適化",
         ],
         keywords: ["脱炭素", "省エネルギー", "時効析出", "水素脆化特性"],
-        image: "/images/materials-research.png",
+        image: materialsResearchImage,
         additionalInfo:
             "輸送機器の軽量化は、CO2排出削減に直結する重要な技術課題です。当研究室では、陽電子消滅法により析出物周辺の空孔クラスターを検出し、時効硬化のメカニズムを原子レベルで解明しています。これにより、より効率的な熱処理条件の設計が可能となります。",
         achievements: [
@@ -69,7 +72,7 @@ const researchThemes: ResearchTheme[] = [
             "ナノ結晶材料",
             "高エントロピー合金",
         ],
-        image: "/images/research-lab.png",
+        image: researchLabImage,
         additionalInfo:
             "次世代のエネルギー社会を支える機能材料の開発において、材料内部の欠陥構造の理解は不可欠です。特に水素吸蔵合金における水素原子のトラップサイトの解明は、水素社会実現に向けた重要な基礎研究です。",
         achievements: [
@@ -97,7 +100,7 @@ const researchThemes: ResearchTheme[] = [
             "欠陥構造シミュレーション",
             "第一原理計算",
         ],
-        image: "/images/seminar-discussion.png",
+        image: seminarDiscussionImage,
         additionalInfo:
             "計算科学の発展により、実験だけでは困難だった原子レベルの現象解明が可能になりました。当研究室では、VASPやOpenMXなどの第一原理計算コードを用いて、陽電子寿命や電子-陽電子対消滅率を理論的に予測し、実験結果との比較により材料中の欠陥種を同定しています。",
         achievements: [
@@ -245,7 +248,7 @@ export default function ResearchPage() {
                                             <div className="relative mb-6">
                                                 <div className="absolute -inset-4 bg-gradient-to-br from-[var(--electric-blue)]/5 to-transparent rounded-2xl" />
                                                 <img
-                                                    src={`${import.meta.env.BASE_URL}${theme.image.replace(/^\//, "")}`}
+                                                    src={theme.image}
                                                     alt={theme.title}
                                                     className="relative w-full rounded-xl shadow-lg"
                                                 />

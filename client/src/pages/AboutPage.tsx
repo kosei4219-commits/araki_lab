@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { useEffect, useRef, useState } from "react";
 import { ArrowLeft } from "lucide-react";
 import { Link } from "wouter";
+import positronImage from "@/assets/images/positron-annihilation.png";
 
 export default function AboutPage() {
     const [isVisible, setIsVisible] = useState(false);
@@ -117,7 +118,7 @@ export default function AboutPage() {
                                 <div className="relative">
                                     <div className="absolute -inset-4 bg-gradient-to-br from-[var(--electric-blue)]/10 to-transparent rounded-2xl" />
                                     <img
-                                        src={`${import.meta.env.BASE_URL}images/positron-annihilation.png`}
+                                        src={positronImage}
                                         alt="陽電子消滅プロセスの図解"
                                         className="relative w-full rounded-xl shadow-2xl"
                                     />
