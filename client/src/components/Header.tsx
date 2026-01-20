@@ -1,7 +1,7 @@
 /**
  * Header Component
  * Design: Scientific Precision - Swiss International Style
- * Features: Sticky navigation, language toggle, mobile menu
+ * Features: Sticky navigation, language toggle, mobile menu, multi-page support
  */
 
 import { Button } from "@/components/ui/button";
@@ -9,20 +9,21 @@ import { Sheet, SheetContent, SheetTrigger, SheetTitle, SheetDescription } from 
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import { Menu, Globe } from "lucide-react";
 import { useState, useEffect } from "react";
+import { Link } from "wouter";
 
 interface NavItem {
   label: string;
   labelEn: string;
-  href: string;
+  path: string;
 }
 
 const navItems: NavItem[] = [
-  { label: "ホーム", labelEn: "Home", href: "#home" },
-  { label: "研究室紹介", labelEn: "About Us", href: "#about" },
-  { label: "研究内容", labelEn: "Research", href: "#research" },
-  { label: "教育・メンバー", labelEn: "Education", href: "#education" },
-  { label: "進路", labelEn: "Career", href: "#career" },
-  { label: "ニュース", labelEn: "News", href: "#news" },
+  { label: "ホーム", labelEn: "Home", path: "/" },
+  { label: "研究室紹介", labelEn: "About Us", path: "/about" },
+  { label: "研究内容", labelEn: "Research", path: "/research" },
+  { label: "教育・メンバー", labelEn: "Education", path: "/education" },
+  { label: "進路", labelEn: "Career", path: "/career" },
+  { label: "ニュース", labelEn: "News", path: "/news" },
 ];
 
 export default function Header() {
@@ -38,55 +39,35 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const scrollToSection = (href: string) => {
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-    setIsOpen(false);
-  };
-
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
           ? "bg-background/95 backdrop-blur-md shadow-sm border-b border-border"
           : "bg-transparent"
-      }`}
+        }`}
     >
       <div className="container">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
-          <a
-            href="#home"
-            onClick={(e) => {
-              e.preventDefault();
-              scrollToSection("#home");
-            }}
-            className="flex flex-col"
-          >
-            <span className="text-lg md:text-xl font-bold text-foreground">
-              荒木研究室
-            </span>
-            <span className="text-xs text-muted-foreground font-mono">
-              Araki Laboratory
-            </span>
-          </a>
+          <Link href="/">
+            <div className="flex flex-col cursor-pointer">
+              <span className="text-lg md:text-xl font-bold text-foreground">
+                荒木研究室
+              </span>
+              <span className="text-xs text-muted-foreground font-mono">
+                Araki Laboratory
+              </span>
+            </div>
+          </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center gap-1">
             {navItems.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                onClick={(e) => {
-                  e.preventDefault();
-                  scrollToSection(item.href);
-                }}
-                className="px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-              >
-                {isEnglish ? item.labelEn : item.label}
-              </a>
+              <Link key={item.path} href={item.path}>
+                <span className="px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors cursor-pointer">
+                  {isEnglish ? item.labelEn : item.label}
+                </span>
+              </Link>
             ))}
           </nav>
 
@@ -126,17 +107,14 @@ export default function Header() {
                   </div>
                   <nav className="flex flex-col gap-2">
                     {navItems.map((item) => (
-                      <a
-                        key={item.href}
-                        href={item.href}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          scrollToSection(item.href);
-                        }}
-                        className="px-4 py-3 text-base font-medium text-muted-foreground hover:text-foreground hover:bg-muted rounded-lg transition-colors"
-                      >
-                        {isEnglish ? item.labelEn : item.label}
-                      </a>
+                      <Link key={item.path} href={item.path}>
+                        <span
+                          onClick={() => setIsOpen(false)}
+                          className="block px-4 py-3 text-base font-medium text-muted-foreground hover:text-foreground hover:bg-muted rounded-lg transition-colors cursor-pointer"
+                        >
+                          {isEnglish ? item.labelEn : item.label}
+                        </span>
+                      </Link>
                     ))}
                   </nav>
                   <Button

@@ -1,23 +1,23 @@
 /**
- * News & Achievements Section Component
+ * News & Achievements Section Component (Summary)
  * Design: Scientific Precision
- * Features: News feed, categorized achievements
+ * Features: Latest news with link to detail page
  */
 
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useEffect, useRef, useState } from "react";
-import { FileText, Award, Calendar, ChevronRight } from "lucide-react";
+import { FileText, Award, Calendar, ChevronRight, ArrowRight } from "lucide-react";
+import { Link } from "wouter";
 
 interface NewsItem {
   date: string;
   category: "publication" | "award" | "event";
   title: string;
-  description?: string;
 }
 
-const newsItems: NewsItem[] = [
+const latestNews: NewsItem[] = [
   {
     date: "2025.01.10",
     category: "publication",
@@ -47,51 +47,21 @@ const newsItems: NewsItem[] = [
     title:
       "D2の佐藤さんが国際会議 ICPA-19 にて Best Poster Award を受賞しました。",
   },
-  {
-    date: "2024.09.10",
-    category: "event",
-    title: "日本金属学会2024年秋期講演大会にて4件の発表を行いました。",
-  },
-  {
-    date: "2024.08.25",
-    category: "publication",
-    title:
-      "水素吸蔵合金の陽電子消滅特性に関する論文が International Journal of Hydrogen Energy に掲載されました。",
-  },
-  {
-    date: "2024.07.15",
-    category: "event",
-    title: "前期中間発表会を開催しました。",
-  },
-  {
-    date: "2024.06.20",
-    category: "award",
-    title: "M1の田中さんが日本金属学会春期講演大会にて優秀発表賞を受賞しました。",
-  },
-  {
-    date: "2024.05.10",
-    category: "publication",
-    title:
-      "第一原理計算による欠陥形成エネルギーの研究が Computational Materials Science に掲載されました。",
-  },
 ];
 
 const categoryConfig = {
   publication: {
     label: "論文",
-    labelEn: "Publication",
     icon: <FileText className="h-4 w-4" />,
     color: "bg-blue-500/10 text-blue-600",
   },
   award: {
     label: "受賞",
-    labelEn: "Award",
     icon: <Award className="h-4 w-4" />,
     color: "bg-amber-500/10 text-amber-600",
   },
   event: {
     label: "イベント",
-    labelEn: "Event",
     icon: <Calendar className="h-4 w-4" />,
     color: "bg-green-500/10 text-green-600",
   },
@@ -118,11 +88,6 @@ export default function NewsSection() {
     return () => observer.disconnect();
   }, []);
 
-  const filterNews = (category: string) => {
-    if (category === "all") return newsItems;
-    return newsItems.filter((item) => item.category === category);
-  };
-
   return (
     <section
       id="news"
@@ -132,9 +97,8 @@ export default function NewsSection() {
       <div className="container">
         {/* Section Header */}
         <div
-          className={`mb-16 transition-all duration-700 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-          }`}
+          className={`mb-16 transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+            }`}
         >
           <p className="section-title">News & Achievements</p>
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
@@ -146,93 +110,71 @@ export default function NewsSection() {
           </p>
         </div>
 
-        {/* Tabs */}
+        {/* News List */}
         <div
-          className={`transition-all duration-700 delay-200 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-          }`}
+          className={`space-y-4 mb-12 transition-all duration-700 delay-200 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+            }`}
         >
-          <Tabs defaultValue="all" className="w-full">
-            <TabsList className="w-full flex flex-wrap justify-start gap-2 bg-transparent h-auto p-0 mb-8">
-              <TabsTrigger
-                value="all"
-                className="px-4 py-2 rounded-lg border border-border bg-background data-[state=active]:bg-[var(--navy-700)] data-[state=active]:text-white data-[state=active]:border-[var(--navy-700)] transition-all"
-              >
-                すべて
-              </TabsTrigger>
-              {Object.entries(categoryConfig).map(([key, config]) => (
-                <TabsTrigger
-                  key={key}
-                  value={key}
-                  className="flex items-center gap-2 px-4 py-2 rounded-lg border border-border bg-background data-[state=active]:bg-[var(--navy-700)] data-[state=active]:text-white data-[state=active]:border-[var(--navy-700)] transition-all"
-                >
-                  {config.icon}
-                  <span>{config.label}</span>
-                </TabsTrigger>
-              ))}
-            </TabsList>
+          {latestNews.map((item, index) => (
+            <Card
+              key={index}
+              className="border-border hover:border-[var(--electric-blue)]/50 transition-all group"
+            >
+              <CardContent className="p-6">
+                <div className="flex flex-col md:flex-row md:items-start gap-4">
+                  {/* Date */}
+                  <div className="flex-shrink-0">
+                    <span className="text-sm font-mono text-muted-foreground">
+                      {item.date}
+                    </span>
+                  </div>
 
-            {["all", "publication", "award", "event"].map((category) => (
-              <TabsContent key={category} value={category} className="mt-0">
-                <div className="space-y-4">
-                  {filterNews(category).map((item, index) => (
-                    <Card
-                      key={index}
-                      className="border-border hover:border-[var(--electric-blue)]/50 transition-all group"
+                  {/* Category Badge */}
+                  <div className="flex-shrink-0">
+                    <Badge
+                      variant="secondary"
+                      className={`${categoryConfig[item.category].color
+                        } flex items-center gap-1`}
                     >
-                      <CardContent className="p-6">
-                        <div className="flex flex-col md:flex-row md:items-start gap-4">
-                          {/* Date */}
-                          <div className="flex-shrink-0">
-                            <span className="text-sm font-mono text-muted-foreground">
-                              {item.date}
-                            </span>
-                          </div>
+                      {categoryConfig[item.category].icon}
+                      {categoryConfig[item.category].label}
+                    </Badge>
+                  </div>
 
-                          {/* Category Badge */}
-                          <div className="flex-shrink-0">
-                            <Badge
-                              variant="secondary"
-                              className={`${
-                                categoryConfig[item.category].color
-                              } flex items-center gap-1`}
-                            >
-                              {categoryConfig[item.category].icon}
-                              {categoryConfig[item.category].label}
-                            </Badge>
-                          </div>
+                  {/* Content */}
+                  <div className="flex-1">
+                    <p className="text-foreground leading-relaxed group-hover:text-[var(--navy-700)] transition-colors">
+                      {item.title}
+                    </p>
+                  </div>
 
-                          {/* Content */}
-                          <div className="flex-1">
-                            <p className="text-foreground leading-relaxed group-hover:text-[var(--navy-700)] transition-colors">
-                              {item.title}
-                            </p>
-                            {item.description && (
-                              <p className="mt-2 text-sm text-muted-foreground">
-                                {item.description}
-                              </p>
-                            )}
-                          </div>
-
-                          {/* Arrow */}
-                          <div className="flex-shrink-0 hidden md:block">
-                            <ChevronRight className="h-5 w-5 text-muted-foreground group-hover:text-[var(--electric-blue)] group-hover:translate-x-1 transition-all" />
-                          </div>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  ))}
+                  {/* Arrow */}
+                  <div className="flex-shrink-0 hidden md:block">
+                    <ChevronRight className="h-5 w-5 text-muted-foreground group-hover:text-[var(--electric-blue)] group-hover:translate-x-1 transition-all" />
+                  </div>
                 </div>
-              </TabsContent>
-            ))}
-          </Tabs>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+
+        {/* CTA Button */}
+        <div
+          className={`text-center transition-all duration-700 delay-400 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+            }`}
+        >
+          <Link href="/news">
+            <Button className="bg-[var(--navy-700)] hover:bg-[var(--navy-600)] text-white">
+              すべてのニュースを見る
+              <ArrowRight className="h-4 w-4 ml-2" />
+            </Button>
+          </Link>
         </div>
 
         {/* Summary Stats */}
         <div
-          className={`grid grid-cols-2 md:grid-cols-4 gap-8 mt-16 pt-12 border-t border-border transition-all duration-700 delay-400 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-          }`}
+          className={`grid grid-cols-2 md:grid-cols-4 gap-8 mt-16 pt-12 border-t border-border transition-all duration-700 delay-600 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+            }`}
         >
           {[
             { value: "100+", label: "査読付き論文" },

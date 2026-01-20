@@ -1,52 +1,26 @@
 /**
- * Education & Members Section Component
+ * Education & Members Section Component (Summary)
  * Design: Scientific Precision
- * Features: Education philosophy, annual schedule, lab atmosphere
+ * Features: Brief overview with link to detail page
  */
 
 import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { useEffect, useRef, useState } from "react";
 import {
   BookOpen,
   Users,
-  Calendar,
-  Award,
-  MessageSquare,
   Globe,
+  ArrowRight,
 } from "lucide-react";
+import { Link } from "wouter";
 
-interface ScheduleItem {
-  month: string;
-  events: string[];
-}
-
-const annualSchedule: ScheduleItem[] = [
-  { month: "4月", events: ["新年度スタート"] },
-  { month: "5月", events: ["中間発表準備"] },
-  { month: "6月", events: ["日本金属学会（春期）"] },
-  { month: "7月", events: ["前期中間発表"] },
-  { month: "8月", events: ["夏季休暇", "集中実験期間"] },
-  { month: "9月", events: ["日本金属学会（秋期）", "学会発表"] },
-  { month: "10月", events: ["後期開始", "研究室配属説明会"] },
-  { month: "11月", events: ["卒論・修論中間発表"] },
-  { month: "12月", events: ["研究室忘年会"] },
-  { month: "1月", events: ["修士論文提出", "卒業論文執筆"] },
-  { month: "2月", events: ["修士論文発表", "卒業論文発表"] },
-  { month: "3月", events: ["卒業式", "追いコン"] },
-];
-
-const educationFeatures = [
+const educationHighlights = [
   {
     icon: <BookOpen className="h-6 w-6" />,
-    title: "週次リサーチレポート",
+    title: "月次リサーチレポート",
     description:
-      "毎週の研究進捗を報告し、教員からのフィードバックを受けることで、研究の方向性を常に確認します。",
-  },
-  {
-    icon: <MessageSquare className="h-6 w-6" />,
-    title: "雑誌会・輪講",
-    description:
-      "最新の論文を読み解き、発表することで、専門知識の深化とプレゼンテーション能力を養います。",
+      "毎月の研究進捗を報告し、教員からのフィードバックを受けることで、研究の方向性を常に確認します。",
   },
   {
     icon: <Users className="h-6 w-6" />,
@@ -59,18 +33,6 @@ const educationFeatures = [
     title: "国際学会発表",
     description:
       "国内外の学会での発表機会を積極的に設け、国際的に通用する研究者・技術者を育成します。",
-  },
-  {
-    icon: <Award className="h-6 w-6" />,
-    title: "学会賞受賞支援",
-    description:
-      "優秀な研究成果に対しては、学会での受賞を目指した発表準備を全面的にサポートします。",
-  },
-  {
-    icon: <Calendar className="h-6 w-6" />,
-    title: "親睦イベント",
-    description:
-      "研究だけでなく、BBQや忘年会など、メンバー間の交流を深めるイベントも定期的に開催しています。",
   },
 ];
 
@@ -104,9 +66,8 @@ export default function EducationSection() {
       <div className="container">
         {/* Section Header */}
         <div
-          className={`mb-16 transition-all duration-700 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-          }`}
+          className={`mb-16 transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+            }`}
         >
           <p className="section-title">Education & Members</p>
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
@@ -116,14 +77,13 @@ export default function EducationSection() {
         </div>
 
         {/* Main Content */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 mb-20">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 mb-12">
           {/* Philosophy */}
           <div
-            className={`transition-all duration-700 delay-200 ${
-              isVisible
-                ? "opacity-100 translate-x-0"
-                : "opacity-0 -translate-x-8"
-            }`}
+            className={`transition-all duration-700 delay-200 ${isVisible
+              ? "opacity-100 translate-x-0"
+              : "opacity-0 -translate-x-8"
+              }`}
           >
             <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-6 leading-tight">
               物理的メカニズムを解明する
@@ -147,7 +107,7 @@ export default function EducationSection() {
               </p>
 
               <p>
-                研究室の雰囲気は真剣かつ和やかで、先輩後輩の垣根なく活発な議論が行われています。困ったときには気軽に相談でき、互いに高め合える環境です。
+                研究室の雰囲気は真剣かつ和やかで、先輩後輩の垣根なく活発な議論が行われています。
               </p>
             </div>
 
@@ -162,92 +122,58 @@ export default function EducationSection() {
             </div>
           </div>
 
-          {/* Annual Schedule */}
+          {/* Education Features */}
           <div
-            className={`transition-all duration-700 delay-400 ${
-              isVisible
-                ? "opacity-100 translate-x-0"
-                : "opacity-0 translate-x-8"
-            }`}
+            className={`transition-all duration-700 delay-400 ${isVisible
+              ? "opacity-100 translate-x-0"
+              : "opacity-0 translate-x-8"
+              }`}
           >
-            <h4 className="text-lg font-bold text-foreground mb-6 flex items-center gap-2">
-              <Calendar className="h-5 w-5 text-[var(--electric-blue)]" />
-              年間スケジュール
+            <h4 className="text-lg font-bold text-foreground mb-6">
+              教育の特徴
             </h4>
-
-            <div className="relative">
-              {/* Timeline line */}
-              <div className="absolute left-[60px] top-0 bottom-0 w-px bg-border" />
-
-              <div className="space-y-4">
-                {annualSchedule.map((item, index) => (
-                  <div key={index} className="flex items-start gap-4">
-                    <div className="w-14 text-right">
-                      <span className="text-sm font-mono text-muted-foreground">
-                        {item.month}
-                      </span>
-                    </div>
-                    <div className="relative">
-                      <div className="absolute left-0 top-2 w-3 h-3 rounded-full bg-[var(--navy-700)] border-2 border-background" />
-                    </div>
-                    <div className="flex-1 pl-4 pb-4">
-                      <div className="flex flex-wrap gap-2">
-                        {item.events.map((event, eventIndex) => (
-                          <span
-                            key={eventIndex}
-                            className="text-sm bg-muted px-3 py-1 rounded-full text-foreground"
-                          >
-                            {event}
-                          </span>
-                        ))}
+            <div className="space-y-4 mb-8">
+              {educationHighlights.map((feature, index) => (
+                <Card
+                  key={index}
+                  className="border-border hover:border-[var(--electric-blue)]/50 transition-colors"
+                >
+                  <CardContent className="p-5">
+                    <div className="flex items-start gap-4">
+                      <div className="w-10 h-10 rounded-lg bg-[var(--navy-700)]/10 flex items-center justify-center text-[var(--navy-700)] flex-shrink-0">
+                        {feature.icon}
+                      </div>
+                      <div>
+                        <h5 className="font-bold text-foreground mb-1">
+                          {feature.title}
+                        </h5>
+                        <p className="text-sm text-muted-foreground leading-relaxed">
+                          {feature.description}
+                        </p>
                       </div>
                     </div>
-                  </div>
-                ))}
-              </div>
+                  </CardContent>
+                </Card>
+              ))}
             </div>
-          </div>
-        </div>
 
-        {/* Education Features Grid */}
-        <div
-          className={`transition-all duration-700 delay-600 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-          }`}
-        >
-          <h4 className="text-lg font-bold text-foreground mb-8 text-center">
-            教育の特徴
-          </h4>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {educationFeatures.map((feature, index) => (
-              <Card
-                key={index}
-                className="border-border hover:border-[var(--electric-blue)]/50 transition-colors"
-              >
-                <CardContent className="p-6">
-                  <div className="w-12 h-12 rounded-lg bg-[var(--navy-700)]/10 flex items-center justify-center text-[var(--navy-700)] mb-4">
-                    {feature.icon}
-                  </div>
-                  <h5 className="font-bold text-foreground mb-2">
-                    {feature.title}
-                  </h5>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    {feature.description}
-                  </p>
-                </CardContent>
-              </Card>
-            ))}
+            {/* CTA Button */}
+            <Link href="/education">
+              <Button className="w-full bg-[var(--navy-700)] hover:bg-[var(--navy-600)] text-white">
+                教育・メンバーの詳細を見る
+                <ArrowRight className="h-4 w-4 ml-2" />
+              </Button>
+            </Link>
           </div>
         </div>
 
         {/* Members Note */}
         <div
-          className={`mt-16 p-8 bg-muted/50 rounded-2xl border border-border text-center transition-all duration-700 delay-800 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-          }`}
+          className={`p-8 bg-muted/50 rounded-2xl border border-border text-center transition-all duration-700 delay-600 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+            }`}
         >
           <p className="text-muted-foreground">
-            現在、教授1名、准教授1名、助教1名、博士課程学生、修士課程学生、学部4年生が在籍しています。
+            現在、教授1名、准教授1名、修士課程学生11名、学部生8名が在籍しています。
             <br />
             詳細なメンバー情報については、研究室見学時にご案内いたします。
           </p>

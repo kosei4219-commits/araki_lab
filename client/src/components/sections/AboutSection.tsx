@@ -1,10 +1,13 @@
 /**
- * About Section Component
+ * About Section Component (Summary)
  * Design: Scientific Precision
- * Features: Positron annihilation explanation with diagram
+ * Features: Brief overview with link to detail page
  */
 
 import { useEffect, useRef, useState } from "react";
+import { Button } from "@/components/ui/button";
+import { ArrowRight } from "lucide-react";
+import { Link } from "wouter";
 
 export default function AboutSection() {
   const [isVisible, setIsVisible] = useState(false);
@@ -36,9 +39,8 @@ export default function AboutSection() {
       <div className="container">
         {/* Section Header */}
         <div
-          className={`mb-16 transition-all duration-700 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-          }`}
+          className={`mb-16 transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+            }`}
         >
           <p className="section-title">About Us</p>
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
@@ -51,11 +53,10 @@ export default function AboutSection() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Text Content */}
           <div
-            className={`transition-all duration-700 delay-200 ${
-              isVisible
-                ? "opacity-100 translate-x-0"
-                : "opacity-0 -translate-x-8"
-            }`}
+            className={`transition-all duration-700 delay-200 ${isVisible
+              ? "opacity-100 translate-x-0"
+              : "opacity-0 -translate-x-8"
+              }`}
           >
             <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-6 leading-tight">
               目に見えない原子の空孔を検知する
@@ -79,8 +80,7 @@ export default function AboutSection() {
               </p>
 
               <p>
-                この手法により、電子顕微鏡では観察困難な原子空孔やナノスケールの欠陥を高感度で検出することが可能です。アインシュタインの
-                E=mc² の原理を工学的に応用し、金属・半導体の微細構造解析において世界的な成果を上げています。
+                この手法により、電子顕微鏡では観察困難な原子空孔やナノスケールの欠陥を高感度で検出することが可能です。
               </p>
 
               <div className="bg-muted/50 border border-border rounded-lg p-6 mt-8">
@@ -101,16 +101,23 @@ export default function AboutSection() {
                   ))}
                 </ul>
               </div>
+
+              {/* CTA Button */}
+              <Link href="/about">
+                <Button className="mt-6 bg-[var(--navy-700)] hover:bg-[var(--navy-600)] text-white">
+                  詳細を見る
+                  <ArrowRight className="h-4 w-4 ml-2" />
+                </Button>
+              </Link>
             </div>
           </div>
 
           {/* Diagram */}
           <div
-            className={`transition-all duration-700 delay-400 ${
-              isVisible
-                ? "opacity-100 translate-x-0"
-                : "opacity-0 translate-x-8"
-            }`}
+            className={`transition-all duration-700 delay-400 ${isVisible
+              ? "opacity-100 translate-x-0"
+              : "opacity-0 translate-x-8"
+              }`}
           >
             <div className="relative">
               <div className="absolute -inset-4 bg-gradient-to-br from-[var(--electric-blue)]/10 to-transparent rounded-2xl" />
@@ -135,9 +142,8 @@ export default function AboutSection() {
 
         {/* Stats */}
         <div
-          className={`grid grid-cols-2 md:grid-cols-4 gap-8 mt-20 pt-12 border-t border-border transition-all duration-700 delay-600 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-          }`}
+          className={`grid grid-cols-2 md:grid-cols-4 gap-8 mt-20 pt-12 border-t border-border transition-all duration-700 delay-600 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+            }`}
         >
           {[
             { value: "30+", label: "年以上の研究実績" },
